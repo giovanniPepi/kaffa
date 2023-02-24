@@ -5,18 +5,19 @@ import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse.BodyHandlers
 import java.time.OffsetDateTime
+import java.time.format.DateTimeFormatter
 
 
 class Exercise5 {
 
-	fun getTime() {
+	fun getTime() : String? {
 		val client = HttpClient.newBuilder().build()
 		val request = HttpRequest.newBuilder().uri(URI.create("http://worldclockapi.com/api/json/utc/now")).build()
 		val response = client.send(request, BodyHandlers.ofString())
 
 		if (response.statusCode() != 200) {
 			println("Service unavailable")
-			return
+			return null
 		}
 
 		val typeRef: TypeReference<HashMap<String, String>> = object : TypeReference<HashMap<String, String>>() {}
@@ -27,6 +28,8 @@ class Exercise5 {
 
 		println("UTC: $utc")
 		println("Local: $local")
+
+		return local.toString()
 	}
 }
 fun main() {
