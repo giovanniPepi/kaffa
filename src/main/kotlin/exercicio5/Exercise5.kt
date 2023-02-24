@@ -1,23 +1,34 @@
-package com.org.exercise1.kt
-
+import com.fasterxml.jackson.core.type.TypeReference
+import com.fasterxml.jackson.databind.ObjectMapper
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse.BodyHandlers
+import java.time.OffsetDateTime
+
 
 class Exercise5 {
 
-
-	fun teste() {
+	fun getTime() {
 		val client = HttpClient.newBuilder().build()
 		val request = HttpRequest.newBuilder().uri(URI.create("http://worldclockapi.com/api/json/utc/now")).build()
 		val response = client.send(request, BodyHandlers.ofString())
 
+		if (response.statusCode() != 200) {
+			println("Service unavailable")
+			return
+		}
 
-		println(response.body())
+		val typeRef: TypeReference<HashMap<String, String>> = object : TypeReference<HashMap<String, String>>() {}
+		val responseMap = ObjectMapper().readValue(response.body(), typeRef)
+
+		val utc = OffsetDateTime.parse(responseMap["currentDateTime"])
+		val local = utc.minusHours(3)
+
+		println("UTC: $utc")
+		println("Local: $local")
 	}
 }
-
 fun main() {
-	Exercise5().teste()
+	Exercise5().getTime()
 }
