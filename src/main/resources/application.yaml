@@ -1,0 +1,21 @@
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /log
+      settings:
+        trace: false
+        web-allow-others: false
+  datasource:
+    url: jdbc:h2:file:/tmp/tasks.db
+    username: test
+    password: test
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        use_sql_comments: true
+        format_sql: true
