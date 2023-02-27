@@ -7,7 +7,7 @@
  * **/
 
 class Exercise1 {
-	
+
 	// Helper function to format our string:
 	private fun cnpjSplitter(cnpj: String): String {
 		return cnpj.split(".", "/", " ", "-").joinToString("")
@@ -15,7 +15,7 @@ class Exercise1 {
 
 	// Branco do Brasil is the only exception to the length rule, so we check for it before
 	private fun checkBB(cnpj: String): Boolean {
-		val bbCNPJ = "00000000" 
+		val bbCNPJ = "00000000"
 		return cnpj == bbCNPJ
 	}
 
