@@ -1,3 +1,5 @@
+package exercise5
+
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import java.net.URI
@@ -5,12 +7,10 @@ import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse.BodyHandlers
 import java.time.OffsetDateTime
-import java.time.format.DateTimeFormatter
-
 
 class Exercise5 {
 
-	fun getTime() : String? {
+	fun getTime(): String? {
 		val client = HttpClient.newBuilder().build()
 		val request = HttpRequest.newBuilder().uri(URI.create("http://worldclockapi.com/api/json/utc/now")).build()
 		val response = client.send(request, BodyHandlers.ofString())
@@ -32,6 +32,7 @@ class Exercise5 {
 		return local.toString()
 	}
 }
+
 fun main() {
 	Exercise5().getTime()
 }

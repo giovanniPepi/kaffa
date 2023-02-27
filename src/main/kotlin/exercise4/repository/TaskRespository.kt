@@ -1,6 +1,6 @@
-package exercicio4.repository
+package exercise4.repository
 
-import exercicio4.model.Task
+import exercise4.model.Task
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 

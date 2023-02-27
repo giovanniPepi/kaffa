@@ -1,4 +1,4 @@
-package exercicio4.model
+package exercise4.model
 
 import javax.persistence.*
 
